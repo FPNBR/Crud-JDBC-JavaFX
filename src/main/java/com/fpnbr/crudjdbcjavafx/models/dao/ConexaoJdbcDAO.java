@@ -1,9 +1,9 @@
-package com.fpnbr.crudjdbcjavafx.models;
+package com.fpnbr.crudjdbcjavafx.models.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class ConexaoJDBC {
+public class ConexaoJdbcDAO {
 
     private static String url = "jdbc:postgresql://localhost:5432/crudjdbcjavafx";
     private static String user = "postgres";
@@ -14,7 +14,7 @@ public class ConexaoJDBC {
         conectar();
     }
 
-    public ConexaoJDBC() {
+    public ConexaoJdbcDAO() {
         conectar();
     }
 

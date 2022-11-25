@@ -1,8 +1,7 @@
 package com.fpnbr.crudjdbcjavafx.models.dao;
 
-import com.fpnbr.crudjdbcjavafx.models.ConexaoJDBC;
-import com.fpnbr.crudjdbcjavafx.models.entidades.Medico;
-import com.fpnbr.crudjdbcjavafx.models.entidades.Paciente;
+import com.fpnbr.crudjdbcjavafx.models.dto.MedicoDTO;
+import com.fpnbr.crudjdbcjavafx.models.dto.PacienteDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -16,18 +15,18 @@ public class PessoaDAO {
     private Connection connection;
 
     public PessoaDAO() {
-        connection = ConexaoJDBC.getConnection();
+        connection = ConexaoJdbcDAO.getConnection();
     }
 
-    public void criarPaciente(Paciente paciente) {
+    public void criarPaciente(PacienteDTO pacienteDTO) {
         try {
             String sql = "insert into paciente (nome, datanascimento, idade, patologia, medico) values (?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, paciente.getNome());
-            preparedStatement.setString(2, paciente.getDataNascimento());
-            preparedStatement.setInt(3, paciente.getIdade());
-            preparedStatement.setString(4, paciente.getPatologia());
-            preparedStatement.setString(5, paciente.getMedico());
+            preparedStatement.setString(1, pacienteDTO.getNome());
+            preparedStatement.setString(2, pacienteDTO.getDataNascimento());
+            preparedStatement.setInt(3, pacienteDTO.getIdade());
+            preparedStatement.setString(4, pacienteDTO.getPatologia());
+            preparedStatement.setString(5, pacienteDTO.getMedico());
             preparedStatement.execute();
             connection.commit();
         }
@@ -42,8 +41,8 @@ public class PessoaDAO {
         }
     }
 
-    public ObservableList<Paciente> listarPaciente() throws SQLException {
-        ObservableList<Paciente> list = FXCollections.observableArrayList();
+    public ObservableList<PacienteDTO> listarPaciente() throws SQLException {
+        ObservableList<PacienteDTO> list = FXCollections.observableArrayList();
 
         String sql = "select id, nome, datanascimento, idade, patologia, medico from paciente";
 
@@ -51,14 +50,14 @@ public class PessoaDAO {
         ResultSet resultado = preparedStatement.executeQuery();
 
         while (resultado.next()) {
-            Paciente paciente = new Paciente();
-            paciente.setId(resultado.getLong("id"));
-            paciente.setNome(resultado.getString("nome"));
-            paciente.setDataNascimento(resultado.getString("datanascimento"));
-            paciente.setIdade(resultado.getInt("idade"));
-            paciente.setPatologia(resultado.getString("patologia"));
-            paciente.setMedico(resultado.getString("medico"));
-            list.add(paciente);
+            PacienteDTO pacienteDTO = new PacienteDTO();
+            pacienteDTO.setId(resultado.getLong("id"));
+            pacienteDTO.setNome(resultado.getString("nome"));
+            pacienteDTO.setDataNascimento(resultado.getString("datanascimento"));
+            pacienteDTO.setIdade(resultado.getInt("idade"));
+            pacienteDTO.setPatologia(resultado.getString("patologia"));
+            pacienteDTO.setMedico(resultado.getString("medico"));
+            list.add(pacienteDTO);
         }
         return list;
     }
@@ -106,15 +105,15 @@ public class PessoaDAO {
         }
     }
 
-    public void criarMedico(Medico medico) {
+    public void criarMedico(MedicoDTO medicoDTO) {
         try {
             String sql = "insert into medico (nome, datanascimento, idade, crm, especialidade) values (?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, medico.getNome());
-            preparedStatement.setString(2, medico.getDataNascimento());
-            preparedStatement.setInt(3, medico.getIdade());
-            preparedStatement.setString(4, medico.getCrm());
-            preparedStatement.setString(5, medico.getEspecialidade());
+            preparedStatement.setString(1, medicoDTO.getNome());
+            preparedStatement.setString(2, medicoDTO.getDataNascimento());
+            preparedStatement.setInt(3, medicoDTO.getIdade());
+            preparedStatement.setString(4, medicoDTO.getCrm());
+            preparedStatement.setString(5, medicoDTO.getEspecialidade());
             preparedStatement.execute();
             connection.commit();
         }
@@ -129,8 +128,8 @@ public class PessoaDAO {
         }
     }
 
-    public ObservableList<Medico> listarMedico() throws SQLException {
-        ObservableList<Medico> list = FXCollections.observableArrayList();
+    public ObservableList<MedicoDTO> listarMedico() throws SQLException {
+        ObservableList<MedicoDTO> list = FXCollections.observableArrayList();
 
         String sql = "select id, nome, datanascimento, idade, crm, especialidade from medico";
 
@@ -138,14 +137,14 @@ public class PessoaDAO {
         ResultSet resultado = preparedStatement.executeQuery();
 
         while (resultado.next()) {
-            Medico medico = new Medico();
-            medico.setId(resultado.getLong("id"));
-            medico.setNome(resultado.getString("nome"));
-            medico.setDataNascimento(resultado.getString("datanascimento"));
-            medico.setIdade(resultado.getInt("idade"));
-            medico.setCrm(resultado.getString("crm"));
-            medico.setEspecialidade(resultado.getString("especialidade"));
-            list.add(medico);
+            MedicoDTO medicoDTO = new MedicoDTO();
+            medicoDTO.setId(resultado.getLong("id"));
+            medicoDTO.setNome(resultado.getString("nome"));
+            medicoDTO.setDataNascimento(resultado.getString("datanascimento"));
+            medicoDTO.setIdade(resultado.getInt("idade"));
+            medicoDTO.setCrm(resultado.getString("crm"));
+            medicoDTO.setEspecialidade(resultado.getString("especialidade"));
+            list.add(medicoDTO);
         }
         return list;
     }

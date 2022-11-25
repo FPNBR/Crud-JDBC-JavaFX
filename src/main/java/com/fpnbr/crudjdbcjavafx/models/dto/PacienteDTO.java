@@ -1,15 +1,15 @@
-package com.fpnbr.crudjdbcjavafx.models.entidades;
+package com.fpnbr.crudjdbcjavafx.models.dto;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Paciente extends Pessoa {
+public class PacienteDTO extends PessoaDTO {
     private StringProperty patologia;
     private StringProperty medico;
 
-    public Paciente()
+    public PacienteDTO()
     {
         id = new SimpleLongProperty(this, "id");
         nome = new SimpleStringProperty(this, "nome");

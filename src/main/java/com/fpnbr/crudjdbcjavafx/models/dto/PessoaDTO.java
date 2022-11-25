@@ -1,15 +1,15 @@
-package com.fpnbr.crudjdbcjavafx.models.entidades;
+package com.fpnbr.crudjdbcjavafx.models.dto;
 
 import javafx.beans.property.*;
 
-public class Pessoa {
+public abstract class PessoaDTO {
 
     protected LongProperty id;
     protected StringProperty nome;
     protected StringProperty dataNascimento;
     protected IntegerProperty idade;
 
-    public Pessoa()
+    public PessoaDTO()
     {
         id = new SimpleLongProperty(this, "id");
         nome = new SimpleStringProperty(this, "nome");

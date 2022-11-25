@@ -1,8 +1,8 @@
-package com.fpnbr.crudjdbcjavafx.models.entidades;
+package com.fpnbr.crudjdbcjavafx.models.dto;
 
 import javafx.beans.property.StringProperty;
 
-public class Medico extends Pessoa {
+public class MedicoDTO extends PessoaDTO {
     private StringProperty crm;
     private StringProperty especialidade;
 
